@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Alert,
+  Button,
   FlatList,
   Pressable,
   ScrollView,
@@ -9,6 +11,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const DATA = [
   {
     id: "1",
@@ -91,45 +94,98 @@ const HomeScreen = () => {
   //think how to display list either with image and name next to it or big image of food with name underneath
   const [number, onChangeNumber] = React.useState("");
   return (
-    <View>
-      <Text style={{ color: "white" }}>My Recipes!</Text>
-      <Pressable>
-        <Text style={{ color: "white" }}>Search</Text>
-      </Pressable>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-      />
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => <Item title={item.title} />}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          alignItems: "center",
+          flex: 1,
+          borderColor: "red",
+          borderWidth: 2,
+        }}
+      >
+        <Text style={{ color: "white" }}>My Recipes!</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            borderColor: "red",
+            borderWidth: 2,
+            alignItems: "center",
+          }}
+        >
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeNumber}
+            value={number}
+            placeholder="useless placeholder"
+          />
+          <Pressable
+            onPress={() => Alert.alert("Left button pressed")}
+            style={styles.button}
+          >
+            <Text style={{ color: "white" }}>Search</Text>
+          </Pressable>
+        </View>
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => <Item title={item.title} />}
+          keyExtractor={(item) => item.id}
+          style={{ width: "100%" }}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    // justifyContent: "center",
+    // alignItems: "center",
+    borderColor: "red",
+    borderWidth: 2,
+    padding: 8,
   },
   item: {
     backgroundColor: "#f9c2ff",
+    borderColor: "red",
+    borderWidth: 2,
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    // marginHorizontal: 16,
+    // flex: 1,
   },
   title: {
     fontSize: 32,
   },
   input: {
+    borderColor: "red",
+    borderWidth: 2,
     height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
+  },
+  button: {
+    fontWeight: "bold",
+    letterSpacing: 0.1,
+    borderRadius: 1.1,
+    backgroundColor: "grey",
+    color: "white",
+    padding: 2,
+
+    // --hover-shadows: 16px 16px 33px #121212, -16px -16px 33px #303030;
+    // --accent: fuchsia;
+    // font-weight: bold;
+    // letter-spacing: 0.1em;
+    // border: none;
+    // border-radius: 1.1em;
+    // background-color: #212121;
+    // cursor: pointer;
+    // color: white;
+    // padding: 1em 2em;
+    // transition: box-shadow ease-in-out 0.3s, background-color ease-in-out 0.1s,
+    //   letter-spacing ease-in-out 0.1s, transform ease-in-out 0.1s;
+    // box-shadow: 13px 13px 10px #1c1c1c, -13px -13px 10px #262626;
   },
 });
 
