@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Alert,
-  Button,
   FlatList,
   Pressable,
   ScrollView,
@@ -11,6 +10,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { Button, List, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 const DATA = [
   {
@@ -93,6 +93,7 @@ const HomeScreen = () => {
   //have search bar / maybe filter button
   //think how to display list either with image and name next to it or big image of food with name underneath
   const [number, onChangeNumber] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState("");
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -103,7 +104,7 @@ const HomeScreen = () => {
           borderWidth: 2,
         }}
       >
-        <Text style={{ color: "white" }}>My Recipes!</Text>
+        {/* <Text style={{ color: "white" }}>My Recipes!</Text> */}
         <View
           style={{
             display: "flex",
@@ -113,18 +114,24 @@ const HomeScreen = () => {
             alignItems: "center",
           }}
         >
-          <TextInput
+          {/* <TextInput
             style={styles.input}
             onChangeText={onChangeNumber}
             value={number}
             placeholder="useless placeholder"
+          /> */}
+          <Searchbar
+            placeholder="Search"
+            onChangeText={setSearchQuery}
+            value={searchQuery}
+            style={{ width: "80%" }}
           />
-          <Pressable
+          {/* <Pressable
             onPress={() => Alert.alert("Left button pressed")}
             style={styles.button}
           >
             <Text style={{ color: "white" }}>Search</Text>
-          </Pressable>
+          </Pressable> */}
         </View>
         <FlatList
           data={DATA}
@@ -132,6 +139,17 @@ const HomeScreen = () => {
           keyExtractor={(item) => item.id}
           style={{ width: "100%" }}
         />
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
+        <List.Item style={styles.item} title={"Test"}></List.Item>
       </View>
     </SafeAreaView>
   );
