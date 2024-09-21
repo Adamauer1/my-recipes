@@ -139,17 +139,6 @@ const HomeScreen = () => {
           keyExtractor={(item) => item.id}
           style={{ width: "100%" }}
         />
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
-        <List.Item style={styles.item} title={"Test"}></List.Item>
       </View>
     </SafeAreaView>
   );
