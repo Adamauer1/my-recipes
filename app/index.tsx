@@ -10,8 +10,10 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import { Button, List, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import recipesJson from "@/assets/data/recipes.json";
 const DATA = [
   {
     id: "1",
@@ -83,7 +85,17 @@ type ItemProps = { title: string };
 
 const Item = ({ title }: ItemProps) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+    <Link
+      href={{
+        pathname: `/recipes/[id]`,
+        params: { id: 0, recipe: JSON.stringify(recipesJson.recipes[0]) },
+      }}
+      asChild
+    >
+      <Pressable>
+        <Text style={styles.title}>{title}</Text>
+      </Pressable>
+    </Link>
   </View>
 );
 
