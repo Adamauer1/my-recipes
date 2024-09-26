@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Alert,
   FlatList,
+  Image,
   Pressable,
   ScrollView,
   StatusBar,
@@ -13,91 +14,39 @@ import {
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Button, List, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import recipesJson from "@/assets/data/recipes.json";
-const DATA = [
-  {
-    id: "1",
-    title: "First Item",
-  },
-  {
-    id: "2",
-    title: "Second Item",
-  },
-  {
-    id: "3",
-    title: "Third Item",
-  },
-  {
-    id: "4",
-    title: "Third Item",
-  },
-  {
-    id: "5",
-    title: "Third Item",
-  },
-  {
-    id: "6",
-    title: "Third Item",
-  },
-  {
-    id: "7",
-    title: "Third Item",
-  },
-  {
-    id: "8",
-    title: "Third Item",
-  },
-  {
-    id: "9",
-    title: "Third Item",
-  },
-  {
-    id: "10",
-    title: "Third Item",
-  },
-  {
-    id: "11",
-    title: "Third Item",
-  },
-  {
-    id: "12",
-    title: "Third Item",
-  },
-  {
-    id: "13",
-    title: "Third Item",
-  },
-  {
-    id: "14",
-    title: "Third Item",
-  },
-  {
-    id: "15",
-    title: "Third Item",
-  },
-  {
-    id: "16",
-    title: "Third Item",
-  },
-];
-
-type ItemProps = { title: string };
-
-const Item = ({ title }: ItemProps) => (
-  <View style={styles.item}>
-    <Link
-      href={{
-        pathname: `/recipes/[id]`,
-        params: { id: 0, recipe: JSON.stringify(recipesJson.recipes[0]) },
-      }}
-      asChild
-    >
-      <Pressable>
-        <Text style={styles.title}>{title}</Text>
-      </Pressable>
-    </Link>
-  </View>
-);
+// import recipesJson from "@/assets/data/recipes.json";
+import recipes from "@/assets/data/recipes";
+type ItemProps = { recipe: any };
+const image = recipes[0].image;
+const Item = ({ recipe }: ItemProps) => {
+  // console.log(recipe.name);
+  // console.log(recipe.name);
+  // const image = require(recipe.image);
+  return (
+    <View style={styles.item}>
+      <Link
+        href={{
+          pathname: `/recipes/[id]`,
+          params: { id: recipe.id, recipe: JSON.stringify(recipe) },
+        }}
+        asChild
+      >
+        <Pressable>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image source={recipe.image} style={{ flex: 0.3, height: 80 }} />
+            <Text style={styles.title}>{recipe.name}</Text>
+          </View>
+        </Pressable>
+      </Link>
+    </View>
+  );
+};
 
 const HomeScreen = () => {
   //show a list of all recipes
@@ -106,6 +55,19 @@ const HomeScreen = () => {
   //think how to display list either with image and name next to it or big image of food with name underneath
   const [number, onChangeNumber] = React.useState("");
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [displayedRecipes, setDisplayedRecipes] = useState(recipes);
+
+  const handleSearchSubmit = () => {
+    if (searchQuery) {
+      const regex = RegExp(searchQuery, "i");
+      setDisplayedRecipes(
+        recipes.filter((recipe: any) => regex.test(recipe.name))
+      );
+    } else {
+      setDisplayedRecipes(recipes);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -124,6 +86,7 @@ const HomeScreen = () => {
             borderColor: "red",
             borderWidth: 2,
             alignItems: "center",
+            gap: 2,
           }}
         >
           {/* <TextInput
@@ -136,6 +99,7 @@ const HomeScreen = () => {
             placeholder="Search"
             onChangeText={setSearchQuery}
             value={searchQuery}
+            onSubmitEditing={handleSearchSubmit}
             style={{ width: "80%" }}
           />
           {/* <Pressable
@@ -146,9 +110,10 @@ const HomeScreen = () => {
           </Pressable> */}
         </View>
         <FlatList
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} />}
-          keyExtractor={(item) => item.id}
+          data={displayedRecipes}
+          // renderItem={(recipe) => <Item recipe={recipe} />}
+          renderItem={(recipe) => <Item recipe={recipe.item} />}
+          // keyExtractor={(item) => item.id}
           style={{ width: "100%" }}
         />
       </View>
@@ -175,7 +140,9 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   title: {
-    fontSize: 32,
+    fontSize: 20,
+    flex: 0.7,
+    marginLeft: 10,
   },
   input: {
     borderColor: "red",

@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "Popeye's Chicken Sandwich",
-      "image": "",
+      "image": "@/assets/images/maxresdefault.jpg",
       "descriptions": {},
       "ingredients": {
         "marinade": [
@@ -48,18 +48,9 @@
       "link": {}
     },
     {
-      "id": -1,
-      "name": "",
-      "image": "",
-      "descriptions": {},
-      "ingredients": {},
-      "instructions": {},
-      "link": {}
-    },
-    {
-      "id": 2,
+      "id": 1,
       "name": "Philly Pretzel Factory Soft Pretzels",
-      "image": "",
+      "image": "@/assets/images/phillypretzel.jpg",
       "descriptions": {},
       "ingredients": {
         "dough": [
