@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 import { Link, router, useLocalSearchParams } from "expo-router";
-import { Button, List, Searchbar } from "react-native-paper";
+import { Button, IconButton, List, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import recipesJson from "@/assets/data/recipes.json";
 import recipes from "@/assets/data/recipes";
@@ -116,12 +116,33 @@ const HomeScreen = () => {
           // keyExtractor={(item) => item.id}
           style={{ width: "100%" }}
         />
+        <Link
+          // href={{
+          //   pathname: `/recipes/[id]`,
+          //   params: { id: recipe.id, recipe: JSON.stringify(recipe) },
+          // }}
+          href={"/addRecipe"}
+          asChild
+        >
+          <Pressable style={styles.test}>
+            <IconButton icon="plus" size={50} />
+            {/* <Text style={styles.test}>Test</Text> */}
+          </Pressable>
+        </Link>
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  test: {
+    color: "white",
+    position: "absolute",
+    borderColor: "red",
+    borderWidth: 2,
+    right: 0,
+    bottom: 0,
+  },
   container: {
     flex: 1,
     // justifyContent: "center",

@@ -1,6 +1,6 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, router } from "expo-router";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
-import { Title } from "react-native-paper";
+import { IconButton, Title } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type TRecipe = {
@@ -59,7 +59,13 @@ function Recipe({}) {
   };
   return (
     <SafeAreaView>
-      <ScrollView>
+      <IconButton
+        icon="arrow-left"
+        onPress={() => {
+          router.back();
+        }}
+      />
+      <ScrollView style={styles.redBoarder}>
         <Text style={styles.text}>{id}</Text>
         <Text style={styles.text}>{name}</Text>
         <Text style={styles.text}>{image}</Text>
@@ -74,6 +80,10 @@ function Recipe({}) {
 const styles = StyleSheet.create({
   text: {
     color: "white",
+  },
+  redBoarder: {
+    borderColor: "red",
+    borderWidth: 2,
   },
 });
 
